@@ -9,14 +9,14 @@ import CompanyCard from '../views/CompanyCard';
 
 const Companies = () => {
   const dispatch = useDispatch();
-  const { companies , setApplicationsState} = useSelector((state: RootState) => state.applications);
+  const { companies, setApplicationsState } = useSelector((state: RootState) => state.applications);
 
   useEffect(() => {
     const authKey = localStorage.getItem('authKey') || '';
     dispatch(getApplicationDetails(authKey as string));
   }, [dispatch]);
 
-  if(setApplicationsState === RequestStatus.Requested) {
+  if (setApplicationsState === RequestStatus.Requested) {
     return (
       <Container className='mt-2'>
         <Alert variant={'info'}>Loading companies details</Alert>
@@ -24,10 +24,13 @@ const Companies = () => {
     );
   }
 
-  if(setApplicationsState === RequestStatus.Failed) {
+  if (setApplicationsState === RequestStatus.Failed) {
     return (
       <Container className='mt-2'>
         <Alert variant={'danger'}>Ooops! Something went wrong please try again!</Alert>
+        <LinkContainer to='/' className='mt-2 mb-2'>
+          <Button variant='primary'>Home</Button>
+        </LinkContainer>
       </Container>
     );
   }
@@ -43,7 +46,7 @@ const Companies = () => {
   return (
     <Container className='mt-2 mb-2'>
       <LinkContainer to='/create' className='mt-2 mb-2'>
-        <Button variant="outline-success">Create company</Button>
+        <Button variant='outline-success'>Create company</Button>
       </LinkContainer>
       <Row lg={2} xs={1} sm={2}>
         {companies?.length > 0 &&
