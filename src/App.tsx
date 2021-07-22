@@ -3,7 +3,6 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import axios from 'axios';
 
-
 import Routes from './routes/Routes';
 import Navigation from './views/navigation/Navigation';
 
@@ -24,14 +23,14 @@ const App: React.FunctionComponent = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState(false);
 
-  useEffect( () => {
+  useEffect(() => {
     let authKey = localStorage.getItem('authKey') || '';
-    if(!authKey) {
+    if (!authKey) {
       getApiKey()
-      .then(({ data }) => {
-        localStorage.setItem('authKey', data);
-      })
-      .catch((err) => err && setError(true));
+        .then(({ data }) => {
+          localStorage.setItem('authKey', data);
+        })
+        .catch((err) => err && setError(true));
     }
   }, []);
 
